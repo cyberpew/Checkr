@@ -14,24 +14,31 @@ public class HTTPServ {
     	
     	//console scanner
         Scanner reader = new Scanner(System.in);
-        String command = reader.nextLine();
+        String command = "";
         HttpServer httpServ = null;
+        Boolean listen = true;
         
-        if (command.equals("http start")) {
-        	System.out.println("Starting HTTP server...");
-
-        	httpServ = HttpServer.create(new InetSocketAddress(8050), 0); //bind to port
-    		httpServ.createContext("/", new RootHandler()); //set URL
-    		httpServ.createContext("/status/", new StatusHandler()); //set URL
-    		httpServ.createContext("/status", new StatusHandler()); //set URL
-    		httpServ.createContext("/status", new StatusHandler()); //set URL
-    		httpServ.setExecutor(null);
-    		httpServ.start(); //start listening
-        } else if (command.equals("http stop")) {
-	    	System.out.println("Stopping HTTP server...");
-	        httpServ.stop(5);
+        while(listen != false)
+        {
+            command = reader.nextLine();
 	        
-	        System.exit(0);
+            if (command.equals("http start")) {
+	        	System.out.println("Starting HTTP server...");
+	
+	        	httpServ = HttpServer.create(new InetSocketAddress(8050), 0); //bind to port
+	    		httpServ.createContext("/", new RootHandler()); //set URL
+	    		httpServ.createContext("/status/", new StatusHandler()); //set URL
+	    		httpServ.createContext("/status", new StatusHandler()); //set URL
+	    		httpServ.createContext("/status", new StatusHandler()); //set URL
+	    		httpServ.setExecutor(null);
+	    		httpServ.start(); //start listening
+	        } else if (command.equals("http stop")) {
+		    	System.out.println("Stopping HTTP server...");
+		        httpServ.stop(5);
+		        
+		        listen = false;
+		        System.exit(0);
+	        }
         }
 	}
 	
