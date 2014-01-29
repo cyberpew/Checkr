@@ -15,11 +15,12 @@ public class HTTPServ {
     	//console scanner
         Scanner reader = new Scanner(System.in);
         String command = reader.nextLine();
+        HttpServer httpServ = null;
         
         if (command.equals("http start")) {
         	System.out.println("Starting HTTP server...");
 
-    		HttpServer httpServ = HttpServer.create(new InetSocketAddress(8050), 0); //bind to port
+        	httpServ = HttpServer.create(new InetSocketAddress(8050), 0); //bind to port
     		httpServ.createContext("/", new RootHandler()); //set URL
     		httpServ.createContext("/status/", new StatusHandler()); //set URL
     		httpServ.createContext("/status", new StatusHandler()); //set URL
@@ -30,7 +31,6 @@ public class HTTPServ {
     	
 
 	    if (command.equals("http stop")) {
-	    	HttpServer httpServ = HttpServer.create(new InetSocketAddress(8050), 0); // get the http server
 	    	System.out.println("Stopping HTTP server...");
 	        httpServ.stop(5);
 	        
