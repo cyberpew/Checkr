@@ -27,15 +27,12 @@ public class HTTPServ {
     		httpServ.createContext("/status", new StatusHandler()); //set URL
     		httpServ.setExecutor(null);
     		httpServ.start(); //start listening
-        }
-    	
-
-	    if (command.equals("http stop")) {
+        } else if (command.equals("http stop")) {
 	    	System.out.println("Stopping HTTP server...");
 	        httpServ.stop(5);
 	        
 	        System.exit(0);
-	    }
+        }
 	}
 	
 }
