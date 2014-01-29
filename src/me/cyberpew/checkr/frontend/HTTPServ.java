@@ -37,6 +37,7 @@ public class HTTPServ {
 		        httpServ.stop(5);
 		        
 		        listen = false;
+		        reader.close();
 		        System.exit(0);
 	        }
         }
